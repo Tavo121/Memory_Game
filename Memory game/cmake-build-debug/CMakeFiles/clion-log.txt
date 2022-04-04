@@ -1,4 +1,4 @@
-/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/184/bin/ninja/linux/ninja -G Ninja "/home/tavo/Escritorio/Memory game"
+/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/184/bin/ninja/linux/ninja -G Ninja "/home/tavo/Escritorio/Memory_Game/Memory game"
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/tavo/Escritorio/Memory game/cmake-build-debug
+-- Build files have been written to: /home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug

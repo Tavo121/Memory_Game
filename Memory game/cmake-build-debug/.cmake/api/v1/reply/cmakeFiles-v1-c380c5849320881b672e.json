@@ -125,8 +125,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/tavo/Escritorio/Memory game/cmake-build-debug",
-		"source" : "/home/tavo/Escritorio/Memory game"
+		"build" : "/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug",
+		"source" : "/home/tavo/Escritorio/Memory_Game/Memory game"
 	},
 	"version" : 
 	{

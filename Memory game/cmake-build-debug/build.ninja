@@ -39,13 +39,13 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/tavo/Escritorio/Memory$ game/cmake-build-debug/
+cmake_ninja_workdir = /home/tavo/Escritorio/Memory_Game/Memory$ game/cmake-build-debug/
 
 #############################################
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/home/tavo/Escritorio/Memory game/cmake-build-debug" && /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S"/home/tavo/Escritorio/Memory game" -B"/home/tavo/Escritorio/Memory game/cmake-build-debug"
+  COMMAND = cd "/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug" && /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S"/home/tavo/Escritorio/Memory_Game/Memory game" -B"/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -57,7 +57,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/home/tavo/Escritorio/Memory game/cmake-build-debug" && /snap/clion/184/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd "/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug" && /snap/clion/184/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -72,15 +72,31 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_Memory_game: phony || CMakeFiles/Memory_game.dir
 
-build CMakeFiles/Memory_game.dir/main.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory$ game/main.cpp || cmake_object_order_depends_target_Memory_game
+build CMakeFiles/Memory_game.dir/main.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/main.cpp || cmake_object_order_depends_target_Memory_game
   DEP_FILE = CMakeFiles/Memory_game.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -I/home/tavo/Descargas/json-develop/include
   OBJECT_DIR = CMakeFiles/Memory_game.dir
   OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
 
-build CMakeFiles/Memory_game.dir/Server.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory$ game/Server.cpp || cmake_object_order_depends_target_Memory_game
+build CMakeFiles/Memory_game.dir/Server.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/Server.cpp || cmake_object_order_depends_target_Memory_game
   DEP_FILE = CMakeFiles/Memory_game.dir/Server.cpp.o.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -I/home/tavo/Descargas/json-develop/include
+  OBJECT_DIR = CMakeFiles/Memory_game.dir
+  OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
+
+build CMakeFiles/Memory_game.dir/CommandHandler.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/CommandHandler.cpp || cmake_object_order_depends_target_Memory_game
+  DEP_FILE = CMakeFiles/Memory_game.dir/CommandHandler.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I/home/tavo/Descargas/json-develop/include
+  OBJECT_DIR = CMakeFiles/Memory_game.dir
+  OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
+
+build CMakeFiles/Memory_game.dir/Actions.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/Actions.cpp || cmake_object_order_depends_target_Memory_game
+  DEP_FILE = CMakeFiles/Memory_game.dir/Actions.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I/home/tavo/Descargas/json-develop/include
   OBJECT_DIR = CMakeFiles/Memory_game.dir
   OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
 
@@ -92,7 +108,7 @@ build CMakeFiles/Memory_game.dir/Server.cpp.o: CXX_COMPILER__Memory_game_Debug /
 #############################################
 # Link the executable Memory_game
 
-build Memory_game: CXX_EXECUTABLE_LINKER__Memory_game_Debug CMakeFiles/Memory_game.dir/main.cpp.o CMakeFiles/Memory_game.dir/Server.cpp.o
+build Memory_game: CXX_EXECUTABLE_LINKER__Memory_game_Debug CMakeFiles/Memory_game.dir/main.cpp.o CMakeFiles/Memory_game.dir/Server.cpp.o CMakeFiles/Memory_game.dir/CommandHandler.cpp.o CMakeFiles/Memory_game.dir/Actions.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Memory_game.dir
   POST_BUILD = :
@@ -109,7 +125,7 @@ build Memory_game: CXX_EXECUTABLE_LINKER__Memory_game_Debug CMakeFiles/Memory_ga
 # =============================================================================
 
 #############################################
-# Folder: /home/tavo/Escritorio/Memory game/cmake-build-debug
+# Folder: /home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug
 
 build all: phony Memory_game
 

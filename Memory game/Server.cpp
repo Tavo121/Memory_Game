@@ -4,7 +4,7 @@
 
 #include <cstring>
 #include <unistd.h>
-#include "Server.h"
+#include "headers/Server.h"
 #include "iostream"
 using namespace std;
 
@@ -13,20 +13,16 @@ void Server::sender(char text[], int socket){
     send(socket, text, textLenght, 0);
 }
 
-void Server::connect(int server){
+void Server::connect(){
     cout << "Server started" << endl;
     while(server > 0){
-        sender("Server connected...\n", server);
-
         int bytesRecieved = recv(server, buff, bufSize, 0);
-        cout << "Client: " + string(buff, 0, bytesRecieved) << endl;
+        parser->Handle(string(buff, 0, bytesRecieved));
+        cout << "Running" << endl;
+        memset(buff, 0, 1024);
 
-        if(string(buff, 0, bytesRecieved) == "Exit"){
-            close(client);
-            break;
-        }
-        //memset(buff, 0, 1024);
     }
+    cout << "Conenction ended" << endl;
 }
 
 void Server::run(){
@@ -52,7 +48,9 @@ void Server::run(){
     cout << "Looking for clients" << endl;
 
     listen(client, 1);
-
     server = accept(client, (struct sockaddr*)&server_addr, &size);
-    connect(server);
+}
+
+Server::Server() {
+    parser = new CommandHandler;
 }

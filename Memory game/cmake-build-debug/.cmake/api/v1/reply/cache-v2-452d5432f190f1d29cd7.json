@@ -2,6 +2,30 @@
 	"entries" : 
 	[
 		{
+			"name" : "/Descargas/json-develop/cmake_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for /Descargas/json-develop/cmake."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/Descargas/json-develop/cmake_DIR-NOTFOUND"
+		},
+		{
+			"name" : "/Descargas/json-develop_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for /Descargas/json-develop."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/Descargas/json-develop_DIR-NOTFOUND"
+		},
+		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -55,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/tavo/Escritorio/Memory game/cmake-build-debug"
+			"value" : "/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -579,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/tavo/Escritorio/Memory game"
+			"value" : "/home/tavo/Escritorio/Memory_Game/Memory game"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1111,7 +1135,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/tavo/Escritorio/Memory game/cmake-build-debug"
+			"value" : "/home/tavo/Escritorio/Memory_Game/Memory game/cmake-build-debug"
 		},
 		{
 			"name" : "Memory_game_IS_TOP_LEVEL",
@@ -1135,7 +1159,43 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/tavo/Escritorio/Memory game"
+			"value" : "/home/tavo/Escritorio/Memory_Game/Memory game"
+		},
+		{
+			"name" : "include_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for include."
+				}
+			],
+			"type" : "PATH",
+			"value" : "include_DIR-NOTFOUND"
+		},
+		{
+			"name" : "json-develop_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for json-develop."
+				}
+			],
+			"type" : "PATH",
+			"value" : "json-develop_DIR-NOTFOUND"
+		},
+		{
+			"name" : "nlohmann_json_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for nlohmann_json."
+				}
+			],
+			"type" : "PATH",
+			"value" : "nlohmann_json_DIR-NOTFOUND"
 		}
 	],
 	"kind" : "cache",
