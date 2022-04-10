@@ -1,7 +1,5 @@
-#include "headers/Server.h"
+#include "headers/Game.h"
 
 int main() {
-    Server server;
-    server.run();
-    server.connect();
+    Game game;
 }

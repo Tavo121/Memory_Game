@@ -6,7 +6,6 @@
 #include "headers/CommandHandler.h"
 #include <nlohmann/json.hpp>
 #include <iostream>
-#include "headers/Server.h"
 
 using namespace std;
 using namespace nlohmann;

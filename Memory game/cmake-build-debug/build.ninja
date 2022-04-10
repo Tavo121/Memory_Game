@@ -93,8 +93,15 @@ build CMakeFiles/Memory_game.dir/CommandHandler.cpp.o: CXX_COMPILER__Memory_game
   OBJECT_DIR = CMakeFiles/Memory_game.dir
   OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
 
-build CMakeFiles/Memory_game.dir/Actions.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/Actions.cpp || cmake_object_order_depends_target_Memory_game
-  DEP_FILE = CMakeFiles/Memory_game.dir/Actions.cpp.o.d
+build CMakeFiles/Memory_game.dir/Game.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/Game.cpp || cmake_object_order_depends_target_Memory_game
+  DEP_FILE = CMakeFiles/Memory_game.dir/Game.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I/home/tavo/Descargas/json-develop/include
+  OBJECT_DIR = CMakeFiles/Memory_game.dir
+  OBJECT_FILE_DIR = CMakeFiles/Memory_game.dir
+
+build CMakeFiles/Memory_game.dir/DiskMatrix.cpp.o: CXX_COMPILER__Memory_game_Debug /home/tavo/Escritorio/Memory_Game/Memory$ game/DiskMatrix.cpp || cmake_object_order_depends_target_Memory_game
+  DEP_FILE = CMakeFiles/Memory_game.dir/DiskMatrix.cpp.o.d
   FLAGS = -g -std=gnu++14
   INCLUDES = -I/home/tavo/Descargas/json-develop/include
   OBJECT_DIR = CMakeFiles/Memory_game.dir
@@ -108,7 +115,7 @@ build CMakeFiles/Memory_game.dir/Actions.cpp.o: CXX_COMPILER__Memory_game_Debug 
 #############################################
 # Link the executable Memory_game
 
-build Memory_game: CXX_EXECUTABLE_LINKER__Memory_game_Debug CMakeFiles/Memory_game.dir/main.cpp.o CMakeFiles/Memory_game.dir/Server.cpp.o CMakeFiles/Memory_game.dir/CommandHandler.cpp.o CMakeFiles/Memory_game.dir/Actions.cpp.o
+build Memory_game: CXX_EXECUTABLE_LINKER__Memory_game_Debug CMakeFiles/Memory_game.dir/main.cpp.o CMakeFiles/Memory_game.dir/Server.cpp.o CMakeFiles/Memory_game.dir/CommandHandler.cpp.o CMakeFiles/Memory_game.dir/Game.cpp.o CMakeFiles/Memory_game.dir/DiskMatrix.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Memory_game.dir
   POST_BUILD = :
