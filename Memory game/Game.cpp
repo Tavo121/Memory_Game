@@ -3,8 +3,10 @@
 //
 
 #include "headers/Game.h"
+#include "headers/PagedArray.h"
 
 Game::Game() {
-    server.run();
-    server.connect();
+    //server.run();
+    //server.connect();
+    PagedArray pagedArray;
 }

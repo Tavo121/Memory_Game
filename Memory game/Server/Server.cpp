@@ -4,7 +4,7 @@
 
 #include <cstring>
 #include <unistd.h>
-#include "headers/Server.h"
+#include "../headers/Server.h"
 #include "iostream"
 using namespace std;
 

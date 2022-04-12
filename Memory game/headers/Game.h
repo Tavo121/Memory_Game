@@ -14,7 +14,7 @@ public:
 
 private:
     Server server;
-    DiskMatrix diskMatrix;
+    //DiskMatrix diskMatrix;
 };
 
 

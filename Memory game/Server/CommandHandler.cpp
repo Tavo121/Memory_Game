@@ -3,7 +3,7 @@
 //
 
 #include <string>
-#include "headers/CommandHandler.h"
+#include "../headers/CommandHandler.h"
 #include <nlohmann/json.hpp>
 #include <iostream>
 
