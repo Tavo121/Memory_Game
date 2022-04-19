@@ -16,12 +16,13 @@ class CommandHandler {
 public:
     void Handle(string json);
     string J1, J2;
-    CommandHandler();
+    CommandHandler(int socket);
 
 private:
     map<string, function<void()>> CommandMap;
-    void SaveNames(json JSON);
+    void SaveNames(json JSON), sendMatrixSize(), sendNames();
     json JSON;
+    int server;
 };
 
 

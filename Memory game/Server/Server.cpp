@@ -4,13 +4,17 @@
 
 #include <cstring>
 #include <unistd.h>
+#include <thread>
 #include "../headers/Server.h"
 #include "iostream"
 using namespace std;
 
-void Server::sender(char text[], int socket){
-    int textLenght = strlen(text) + 1;
-    send(socket, text, textLenght, 0);
+void Server::sender(string response, int socket){
+    string Response = response + "\n";
+    char res[Response.length()];
+    strcpy(res, Response.c_str());
+    int textLenght = strlen(res);
+    send(socket, res, textLenght, 0);
 }
 
 void Server::connect(){
@@ -18,7 +22,6 @@ void Server::connect(){
     while(server > 0){
         int bytesRecieved = recv(server, buff, bufSize, 0);
         parser->Handle(string(buff, 0, bytesRecieved));
-        cout << "Running" << endl;
         memset(buff, 0, 1024);
 
     }
@@ -49,8 +52,9 @@ void Server::run(){
 
     listen(client, 1);
     server = accept(client, (struct sockaddr*)&server_addr, &size);
+    parser = new CommandHandler(server);
 }
 
 Server::Server() {
-    parser = new CommandHandler;
+
 }

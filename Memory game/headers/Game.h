@@ -13,8 +13,7 @@ public:
     Game();
 
 private:
-    Server server;
-    //DiskMatrix diskMatrix;
+    Server* server = new Server();
 };
 
 

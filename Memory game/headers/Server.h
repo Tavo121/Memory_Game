@@ -15,16 +15,15 @@ using namespace std;
 class Server {
 public:
     void run(), connect();
+    static void sender(string response, int socket);
     Server();
-    static string J1;
 
 private:
-    int client, server, portNum = 5000, bufSize = 1024;
+    int client, server, portNum = 5050, bufSize = 1024;
     bool isExit = false;
     char buff[1024];
     socklen_t size;
     struct sockaddr_in server_addr;
-    void sender(char text[], int socket);
     CommandHandler* parser;
 
 };

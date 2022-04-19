@@ -1,11 +1,17 @@
+package Visuals;
+
+import Connection.Client;
+import Connection.ClientRequests;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
-public class StartingInterface extends Client{
+public class StartingInterface {
     private JFrame Frame;
     private JLabel Background, UsernameText, Title, P1, P2;
     private JButton Play;
@@ -70,12 +76,15 @@ public class StartingInterface extends Client{
                 if(Player1.getText().equals("") || Player2.getText().equals("")){
                     JOptionPane.showMessageDialog(Frame,"Favor ingrese los 2 nombres de usuario");
                 }else{
+                    ClientRequests resquest = ClientRequests.getInstance();
+                    resquest.ClientInstance = ClientInstance;
                     JSONObject json = new JSONObject();
                     json.put("Type", "Names");
                     json.put("P1", Player1.getText());
                     json.put("P2", Player2.getText());
                     ClientInstance.send(json.toJSONString());
-                    System.out.println("Json sent");
+                    Frame.dispose();
+                    resquest.requestMatrix();
                 }
             }
         });
