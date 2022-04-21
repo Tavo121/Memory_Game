@@ -8,21 +8,35 @@
 #include <functional>
 #include <map>
 #include <nlohmann/json.hpp>
+#include "ServerInterface.h"
+#include "PagedArray.h"
 
 using namespace std;
 using namespace nlohmann;
-
+/**
+ * Instituto Tecnologico de Costa Rica
+ * Area de Ingenieria en Computadores
+ *
+ * Lenguaje: C++.
+ * Clase CommandHandler.
+ * @author Gustavo Alvarado Aburto.
+ * @version 1.0.
+ *
+ * Descripcion: Esta clase se encarga de manejar todas las peticiones realizadas por el cliente mediante JSON.
+ */
 class CommandHandler {
 public:
     void Handle(string json);
     string J1, J2;
-    CommandHandler(int socket);
+    CommandHandler(int socket, ServerInterface* windowInstance);
 
 private:
     map<string, function<void()>> CommandMap;
-    void SaveNames(json JSON), sendMatrixSize(), sendNames();
+    void SaveNames(json JSON), sendMatrixSize(), sendNames(), sendCardImage();
     json JSON;
     int server;
+    ServerInterface* Instance;
+    PagedArray pagedArray;
 };
 
 

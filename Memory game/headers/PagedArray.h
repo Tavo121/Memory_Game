@@ -12,19 +12,31 @@
 
 using namespace std;
 
-class PagedArray : public DiskMatrix {
+/**
+ * Instituto Tecnologico de Costa Rica
+ * Area de Ingenieria en Computadores
+ *
+ * Lenguaje: C++.
+ * Clase PagedArray, hereda DiskMatrix.
+ * @author Gustavo Alvarado Aburto.
+ * @version 1.0.
+ *
+ * Descripcion: Esta clase se encarga de la paginacion, carga y descarga de tarjetas en memoria.
+ */
+class PagedArray {
 public:
-    void operator()(int i, int j){
-        getCard(i, j);
+    int operator()(int i, int j){
+        return getCardInMemory(i, j);
     }
-    Card* getCardInMemory(int i, int j);
+    int getCardInMemory(int i, int j);
     PagedArray();
 
 private:
-    int size;
+    int size, TESTi, TESTj;
     vector<Card*> memoryCards;
-    void allocateCards();
-    Card* generateCard(TarjetaDisk diskCard, int i, int j);
+    void allocateCards(), saveCardToDisk(), loadCard(int i, int j);
+    Card* generateCard(int i, int j);
+    DiskMatrix binarMatrix;
 };
 
 

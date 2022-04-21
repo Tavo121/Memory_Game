@@ -9,6 +9,11 @@
 #include "iostream"
 using namespace std;
 
+/**
+ * Este metodo se encarga de enviar datos al cliente, se utiliza formato JSON en string.
+ * @param response Estructura tipo JSON en formato string.
+ * @param socket socket que envia los datos.
+ */
 void Server::sender(string response, int socket){
     string Response = response + "\n";
     char res[Response.length()];
@@ -17,6 +22,9 @@ void Server::sender(string response, int socket){
     send(socket, res, textLenght, 0);
 }
 
+/**
+ * Este metodo se encarga de mantenerse antento a las peticones del cliente y manejarlas mediante la clase CommandHandler.
+ */
 void Server::connect(){
     cout << "Server started" << endl;
     while(server > 0){
@@ -28,8 +36,12 @@ void Server::connect(){
     cout << "Conenction ended" << endl;
 }
 
-void Server::run(){
-    client = socket(AF_INET, SOCK_STREAM, 0);
+/**
+ * Este metodo se encarga de establecer el puerto y sockets para al conexion, asi como inicializar el manejador de peticiones.
+ * @param instance instancia de la ventana del servidor para el manejador de peticiones.
+ */
+void Server::run(ServerInterface* instance){
+    client = socket(AF_INET, SOCK_STREAM, 0);//socket del cliente
 
     if (client < 0){
         cout << "Error connection" << endl;
@@ -52,7 +64,7 @@ void Server::run(){
 
     listen(client, 1);
     server = accept(client, (struct sockaddr*)&server_addr, &size);
-    parser = new CommandHandler(server);
+    parser = new CommandHandler(server, instance);
 }
 
 Server::Server() {

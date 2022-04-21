@@ -4,12 +4,14 @@ import Connection.ClientRequests;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GameInterface {
     private JFrame Frame;
     private JLabel P1, P2, Name1, Name2;
-    private int iSize, jSize, X = 20, Y = 10, Height = 130, Width = 100;
+    private int iSize, jSize, X = 110, Y = 10, Height = 130, Width = 100;
     private static GameInterface instance;
     private final ClientRequests request = ClientRequests.getInstance();
 
@@ -80,16 +82,44 @@ public class GameInterface {
     public void createCardSlots(){
         ArrayList<JLabel> Labels = new ArrayList<>(iSize*jSize);
         ImageIcon icon = new ImageIcon("Marco.png");
-        int count = 0;
+        int count = 0; //fila
         while(count<iSize){
-            for(int i=0; i<jSize; i++){
+            for(int i=0; i<jSize; i++){//columna
                 JLabel slot = new JLabel(icon);
-                slot.setBounds(X,Y,100,145);
-                X = X + 130;
+                slot.setBounds(X,Y,70,100);
+                int I = count;
+                int J = i;
+                slot.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        request.requestCard(I, J);
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
+                X = X + 120;
                 Labels.add(slot);
             }
-            Y = Y + 150;
-            X = 20;
+            Y = Y + 120;
+            X = 110;
             count++;
         }
         for(JLabel item : Labels){
@@ -99,6 +129,6 @@ public class GameInterface {
 
     public static void main(String[] args) {
         GameInterface Interface = new GameInterface();
-        Interface.launchInterface(Integer.valueOf("5"),Integer.valueOf("6"));
+        Interface.launchInterface(Integer.valueOf("6"),Integer.valueOf("5"));
     }
 }

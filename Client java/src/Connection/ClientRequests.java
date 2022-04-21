@@ -30,4 +30,12 @@ public class ClientRequests {
         request.put("Type", "PlayerNames");
         ClientInstance.send(request.toJSONString());
     }
+
+    public void requestCard(int i, int j){
+        request = new JSONObject();
+        request.put("Type", "Card");
+        request.put("I", i);
+        request.put("J", j);
+        ClientInstance.send(request.toJSONString());
+    }
 }
