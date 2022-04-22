@@ -18,6 +18,7 @@ public class ResponseHandler {
     private final HashMap<String, Runnable> responseMap;
     private JSONObject json;
     private GameInterface GameInstance;
+    private int pairs;
 
     /**
      * Constructor, se encarga de crear un HashMap que almacena las acciones para las respustas del servidor.
@@ -66,6 +67,10 @@ public class ResponseHandler {
         if(!validation){
             GameInstance.swapCards();
         }else{
+            pairs++;
+            if(pairs == 1){
+                GameInstance.firstPair = true;
+            }
             GameInstance.addPoints();
         }
     }

@@ -4,6 +4,8 @@ import Connection.ClientRequests;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -18,9 +20,10 @@ public class GameInterface {
     private final ClientRequests request = ClientRequests.getInstance();
     private Font font = new Font("default", Font.BOLD, 14);
     private final CardImages images = new CardImages();
+    private final PowerUps powerUp = new PowerUps();
     private ArrayList<JLabel> Labels = new ArrayList<>(iSize*jSize);
     public int ID;
-    public boolean turn, gotID = false; //true=J1, false=J2
+    public boolean turn, firstPair, gotID = false; //true=J1, false=J2
 
 
     /**
@@ -199,19 +202,17 @@ public class GameInterface {
         }
     }
 
-    private void TimeOut(int milisec){
-        try{
-            Thread.sleep(milisec);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void addPoints(){
         if(turn){
+            if(firstPair){
+                addPowerUpButton("P2");
+            }
             int score = Integer.parseInt(Score2.getText()) + 10;
             Score2.setText(String.valueOf(score));
         }else{
+            if(firstPair){
+                addPowerUpButton("P1");
+            }
             int score = Integer.parseInt(Score1.getText()) + 10;
             Score1.setText(String.valueOf(score));
         }
@@ -225,5 +226,32 @@ public class GameInterface {
         }
         Labels.get((i1*5)+j1).setIcon(new ImageIcon("Marco.png"));
         Labels.get((i2*5)+j2).setIcon(new ImageIcon("Marco.png"));
+    }
+
+    private void addPowerUpButton(String player){ //Primer power up
+        JButton firstPowerUp = new JButton();
+        if(player.equals("P2")){
+            firstPowerUp.setBounds(150,850, 40, 20);
+            firstPowerUp.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    powerUp.firstPairOfCards(Score2);
+                    firstPowerUp.setVisible(false);
+                }
+            });
+            Frame.add(firstPowerUp);
+            firstPair = false;
+        }else{
+            firstPowerUp.setBounds(10,850, 40, 20);
+            firstPowerUp.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    powerUp.firstPairOfCards(Score1);
+                    firstPowerUp.setVisible(false);
+                }
+            });
+            Frame.add(firstPowerUp);
+            firstPair = false;
+        }
     }
 }
