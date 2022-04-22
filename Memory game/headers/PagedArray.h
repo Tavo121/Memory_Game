@@ -35,7 +35,7 @@ public:
     ServerInterface* interfaceInstance;
 
 private:
-    int size, iCopy, jCopy;
+    int size;
     vector<Card*> memoryCards;
     void allocateCards(), saveCardToDisk(), loadCard(int i, int j);
     bool searchCardInMemory(string pos);
