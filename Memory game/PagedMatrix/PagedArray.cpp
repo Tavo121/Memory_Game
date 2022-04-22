@@ -17,14 +17,12 @@ void PagedArray::allocateCards() {//Carga de tarjeta inicial a memoria
         if(binarMatrix.checkCard(iRandom, jRandom, "Memory") == 0){
             auto card = generateCard(iRandom, jRandom);
             memoryCards.push_back(card);
-            size++;
-            count++;
-            TESTi = iRandom;
-            TESTj = jRandom;
             positionsInMemory.push_back(to_string(iRandom) + "," + to_string(jRandom));
+            count++;
             cout << "Tarjeta random cargada: " << iRandom << jRandom << endl;
         }
     }
+    size = memoryCards.size();
 }
 
 /**
@@ -43,13 +41,17 @@ Card* PagedArray::generateCard(int i, int j) {
     card->isInMemory = 1;
     card->pos = position;
     card->ID = cardID;
-    binarMatrix.updateCardStatus(i, j, card);
     //byte array
     return card;
 }
-
+/**
+ * Este metodo se encarga de habilitar 1 espacio en el vector para cargar una tarjeta nueva.
+ * Mediante otro metodos se realiza el guardado de la tarjeta liberada del vector a disco.
+ */
 void PagedArray::saveCardToDisk(){
     Card* temp = memoryCards[size-1];
+    vector<int> data;
+    //descomponiendo string pos
     vector<string> tokens;
     stringstream stream(temp->pos);
     string intermediate;
@@ -58,7 +60,7 @@ void PagedArray::saveCardToDisk(){
     }
     int i = stoi(tokens[0]);
     int j = stoi(tokens[1]);
-    binarMatrix.updateCardStatus(i, j, temp);
+    binarMatrix.updateCardStatus(i, j, generateData(temp));
     free(memoryCards[size-1]);
 }
 
@@ -66,32 +68,57 @@ void PagedArray::loadCard(int i, int j) {
     Card* temp = generateCard(i, j);
     memoryCards[size-1] = temp;
 }
+/**
+ * Este metodo crea una tarjeta temporal con lo datos de la tarjeta en memoria para actualizarlos en disco.
+ * @param card tarjeta en memoria con datos a actualizar.
+ * @return tarjeta temporal lista para ser actualizada en disco
+ */
+DiskMatrix::TarjetaDisk PagedArray::generateData(Card *card) {
+    DiskMatrix::TarjetaDisk tarjeta;
+    tarjeta.ID = card->ID;
+    tarjeta.status = card->status;
+    tarjeta.isInMemory = card->isInMemory;
+    cout << tarjeta.ID << endl;
+    return tarjeta;
+}
 
 /**
- * Este metodo se encarga de buscar el vector paginado la tarjeta solicitada.
+ * Este metodo se encarga retornar el ID de la tarjeta solicitada. Dependiendo de la tarjeta se realiza la paginacion.
  * @param i fila de la tarjeta buscada.
  * @param j columna de la tarjeta buscada.
- * @return retorna la tarjeta solicitada.
+ * @return retorna el ID de la tarjeta solicitada.
  */
 int PagedArray::getCardInMemory(int i, int j) {
     string place = to_string(i) + "," + to_string(j);
-    cout << binarMatrix.checkCard(TESTi,TESTj,"ID") << endl;
-/*    if(binarMatrix.checkCard(i, j, "Memory") == 0) {//paginacion
-
-        cout << "Paginacion" << endl;
-        saveCardToDisk();
-        loadCard(i, j);
-        return memoryCards[size - 1]->ID;
-
-    }else if(binarMatrix.checkCard(i, j, "Memory") == 1){
-        cout << "En memoria" << endl;
-        for(int x=0; x<size; x++) {
-            if (memoryCards[x]->pos == place) {
-                cout << memoryCards[x]->ID << endl;
-                return memoryCards[x]->ID;
+    if(searchCardInMemory(place)){
+        for(int i=0; i<memoryCards.size(); i++){
+            if(memoryCards[i]->pos == place){
+                memoryCards[i]->status = 1; // volteada
+                return memoryCards[i]->ID;
             }
         }
-    }*/
+    }else{ //paginacion
+        cout << "paginacion" << endl;
+        saveCardToDisk(); //descarga a disco de tarjeta
+        loadCard(i, j); //carga de tarjeta a memoria
+        interfaceInstance->updateCards(place);
+        memoryCards[size-1]->status = 1;
+        return memoryCards[size-1]->ID;
+    }
+}
+
+/**
+ * Este metodo se encarga de buscar la tarjeta en memoria.
+ * @param pos posicion de la tarjeta.
+ * @return true si la tarjeta se encuentra en memoria, caso contrario retorna false.
+ */
+bool PagedArray::searchCardInMemory(string pos){
+    for(int i=0; i<memoryCards.size(); i++){
+        if(memoryCards[i]->pos == pos){
+            return true;
+        }
+    }
+    return false;
 }
 
 PagedArray::PagedArray() {

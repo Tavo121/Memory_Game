@@ -6,7 +6,6 @@
 #include <iostream>
 #include <random>
 #include "../headers/DiskMatrix.h"
-#include "../headers/Card.h"
 
 using namespace std;
 
@@ -37,6 +36,7 @@ void DiskMatrix::generateMatrix() {
         cardTemp.status = 0;
         cardTemp.isInMemory = 0;
         file.write((char*)&cardTemp, sizeof(TarjetaDisk));
+        cout << j + 15 << " " << cardTemp.ID << endl;
     }
     file.close();
 }
@@ -71,22 +71,19 @@ int DiskMatrix::checkCard(int i, int j, string option) {//verifica si una carta 
 }
 
 /**
- * Este metodo se encarga de actualizar el estado de las tarjetas en disco (en desarrollo)
+ * Este metodo se encarga de actualizar el estado de las tarjetas en disco.
  * @param i fila de la tarjeta.
  * @param j columna de la tarjeta.
+ * @param data tarjeta con los datos para actualizar en disco.
  */
-void DiskMatrix::updateCardStatus(int i, int j, Card* card) {
-    TarjetaDisk temp;
-    temp.isInMemory = card->isInMemory;
-    temp.status = card->status;
-    temp.ID = card->ID;
+void DiskMatrix::updateCardStatus(int i, int j, TarjetaDisk data) {
     ofstream file("BinaryMatrix.dat", ios::out | ios::binary);
     if(!file){
         cout << "Error opening the file" << endl;
         exit(1);
     }
     file.seekp(i*pageSize+j*cardSize);
-    file.write((char*)&temp, cardSize);
+    file.write((char*)&data, cardSize);
     file.close();
 }
 

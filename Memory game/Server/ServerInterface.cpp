@@ -58,14 +58,24 @@ void ServerInterface::setCardsInMemory(string pos) {
         count = 0;
         X = 10;
         Y = Y + tarjeta.getGlobalBounds().height + 20;
-
-        cout << count << endl;
     }
     tarjeta.setPosition(X,Y);
     texts.push_back(tarjeta);
     X = X + tarjeta.getGlobalBounds().width + 15;
     count++;
 
+}
+
+void ServerInterface::updateCards(string pos) {
+    texts.pop_back();
+    Text tarjeta;
+    string name = "Tarjeta: " + pos;
+    tarjeta.setFont(font);
+    tarjeta.setString(name);
+    tarjeta.setCharacterSize(20);
+    tarjeta.setFillColor(Color::White);
+    tarjeta.setPosition(X, Y);
+    texts.push_back(tarjeta);
 }
 
 void ServerInterface::launchWindow() {

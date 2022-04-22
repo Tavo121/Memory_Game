@@ -14,6 +14,7 @@ public:
     void setPlayerNames(string P1, string P2);
     void threadRender();
     void setCardsInMemory(string pos);
+    void updateCards(string pos);
 
 private:
     RenderWindow window;

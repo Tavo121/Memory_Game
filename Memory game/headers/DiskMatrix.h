@@ -31,7 +31,7 @@ public:
         int isInMemory; // 0=no, 1=si
     };
     DiskMatrix();
-    void generateMatrix(), updateCardStatus(int i, int j, Card* card);
+    void generateMatrix(), updateCardStatus(int i, int j, TarjetaDisk data);
     int checkCard(int i, int j, string option);
     static int randomGenerator(int min, int max);
     int getCard(int i, int j, int option);

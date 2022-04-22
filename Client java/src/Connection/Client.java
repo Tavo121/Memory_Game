@@ -46,7 +46,7 @@ public class Client extends ResponseHandler implements Runnable {
     /**
      * Este metodo se encarga de mantenerse antento a las respuestar del servidor y el manejo de las mismas.
      */
-    public void listen() {
+    public void listen() throws IOException {
         while(true){
             try{
                 String response = in.readLine();
@@ -54,7 +54,8 @@ public class Client extends ResponseHandler implements Runnable {
                 JSONObject JSONResponse = (JSONObject) parser.parse(response); //conversion de respuesta del servidor a JSON
                 handle(JSONResponse); //manejo de la respuesta recibida del servidor.
             }catch(IOException | ParseException e){
-                e.printStackTrace();
+                Client.close();
+                System.out.println("Conexion ended");
             }
         }
     }
@@ -64,6 +65,10 @@ public class Client extends ResponseHandler implements Runnable {
      */
     @Override
     public void run() {
-        listen();
+        try {
+            listen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -32,11 +32,14 @@ public:
     int getCardInMemory(int i, int j);
     vector<string> positionsInMemory;
     PagedArray();
+    ServerInterface* interfaceInstance;
 
 private:
-    int size, TESTi, TESTj;
+    int size;
     vector<Card*> memoryCards;
     void allocateCards(), saveCardToDisk(), loadCard(int i, int j);
+    bool searchCardInMemory(string pos);
+    DiskMatrix::TarjetaDisk generateData(Card* card);
     Card* generateCard(int i, int j);
     DiskMatrix binarMatrix;
 };

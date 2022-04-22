@@ -67,6 +67,7 @@ void CommandHandler::sendCardImage() {
 CommandHandler::CommandHandler(int socket, ServerInterface* windowInstance) {
     server = socket;
     Instance = windowInstance;
+    pagedArray.interfaceInstance = windowInstance;
     CommandMap["Names"] = [this]() {SaveNames(JSON);};
     CommandMap["MatrixSize"] = [this]() {sendMatrixSize();};
     CommandMap["PlayerNames"] = [this]() {sendNames();};
