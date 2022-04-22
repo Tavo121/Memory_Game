@@ -22,7 +22,7 @@ void DiskMatrix::generateMatrix() {
 
     for(int i=0; i<15; i++){//genera mitad de tarjetas aleatorias
         TarjetaDisk card;
-        card.ID = randomGenerator(0, 10); //ID aleatorio de 0 a 10
+        card.ID = randomGenerator(1, 10); //ID aleatorio de 1 a 10
         card.status = 0;
         card.isInMemory = 0;
         file.write((char*)&card, sizeof(TarjetaDisk));

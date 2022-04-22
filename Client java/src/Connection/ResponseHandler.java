@@ -54,7 +54,12 @@ public class ResponseHandler {
     }
 
     private void getID(){
-        System.out.println(json.get("ID"));
+        Long id = (Long) json.get("ID");
+        int ID = id.intValue();
+        System.out.println(id);
+        System.out.println(ID);
+        GameInstance.ID = ID;
+        GameInstance.gotID = true;
     }
 
     private boolean playerTurn(){

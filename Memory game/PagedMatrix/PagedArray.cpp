@@ -98,7 +98,7 @@ int PagedArray::getCardInMemory(int i, int j) {
             }
         }
     }else{ //paginacion
-        cout << "paginacion" << endl;
+        cout << "Paginacion" << endl;
         saveCardToDisk(); //descarga a disco de tarjeta
         loadCard(i, j); //carga de tarjeta a memoria
         interfaceInstance->updateCards(place);

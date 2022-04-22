@@ -15,7 +15,9 @@ public class GameInterface {
     private static GameInterface instance;
     private final ClientRequests request = ClientRequests.getInstance();
     private Font font = new Font("default", Font.BOLD, 14);
-    public boolean turn; //true=J1, false=J2
+    private final CardImages images = new CardImages();
+    public int ID;
+    public boolean turn, gotID = false; //true=J1, false=J2
 
 
     /**
@@ -125,6 +127,7 @@ public class GameInterface {
                 slot.setBounds(X,Y,70,100);
                 int I = count;
                 int J = i;
+                int Id = ID;
                 slot.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -133,6 +136,15 @@ public class GameInterface {
                         if(Clicks == 2){
                             Clicks = 0;
                             switchTurn();
+                        }
+                        while(true){
+                            if(!gotID){
+                                continue;
+                            }else{
+                                slot.setIcon(images.getIcon(ID));
+                                gotID = false;
+                                break;
+                            }
                         }
                     }
 
