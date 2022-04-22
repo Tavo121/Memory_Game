@@ -31,6 +31,33 @@ void ServerInterface::createText() {
     tarjetas.setString("Tarjetas en memoria:");
     tarjetas.setPosition(10, 100);
     texts.push_back(tarjetas);
+
+}
+
+void ServerInterface::setPageFaults() {
+    pageFault.setFont(font);
+    pageFault.setCharacterSize(25);
+    pageFault.setFillColor(Color::Yellow);
+    pageFault.setString("Page Faults:");
+    pageFault.setPosition(10, 500);
+
+    pageFaultCount.setFont(font);
+    pageFaultCount.setString(to_string(faultCount));
+    pageFaultCount.setCharacterSize(20);
+    pageFaultCount.setPosition(pageFault.getGlobalBounds().width + 20, 500);
+}
+
+void ServerInterface::setPageHits() {
+    pageHit.setFont(font);
+    pageHit.setCharacterSize(25);
+    pageHit.setFillColor(Color::Red);
+    pageHit.setString("Page Hits:");
+    pageHit.setPosition(10, pageFault.getGlobalBounds().height + 530);
+
+    pageHitCount.setFont(font);
+    pageHitCount.setString(to_string(hitCount));
+    pageHitCount.setCharacterSize(20);
+    pageHitCount.setPosition(pageHit.getGlobalBounds().width + 20, pageFault.getGlobalBounds().height + 530);
 }
 
 void ServerInterface::setPlayerNames(string P1, string P2) {
@@ -78,9 +105,21 @@ void ServerInterface::updateCards(string pos) {
     texts.push_back(tarjeta);
 }
 
+void ServerInterface::updatePageFault(){
+    faultCount++;
+    pageFaultCount.setString(to_string(faultCount));
+}
+
+void ServerInterface::updatePageHit(){
+    hitCount++;
+    pageHitCount.setString(to_string(hitCount));
+}
+
 void ServerInterface::launchWindow() {
     window.create(VideoMode(500, 800), "Server Interface");
     createText();
+    setPageFaults();
+    setPageHits();
 }
 
 void ServerInterface::threadRender() {
@@ -99,6 +138,10 @@ void ServerInterface::threadRender() {
         window.draw(name2);
         for(int i=0; i<texts.size(); i++)
             window.draw(texts[i]);
+        window.draw(pageFault);
+        window.draw(pageHit);
+        window.draw(pageFaultCount);
+        window.draw(pageHitCount);
         window.display();
     }
 }

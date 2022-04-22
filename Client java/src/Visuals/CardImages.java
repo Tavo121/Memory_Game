@@ -3,7 +3,17 @@ package Visuals;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Instituto Tecnologico de Costa Rica
+ * Area de Ingenieria en Computadores
+ *
+ * Lenguaje: Java.
+ * Clase CardImages.
+ * @author Gustavo Alvarado Aburto.
+ * @version 1.0.
+ *
+ * Descripcion: Esta clase se encarga de generar la imagen para las tarjetas del tablero.
+ */
 public class CardImages {
     private final List<ImageIcon> list = new ArrayList<>(10);
 
@@ -17,10 +27,10 @@ public class CardImages {
         list.add(new ImageIcon("/home/tavo/Documentos/Tarjetas/Card7.png"));
         list.add(new ImageIcon("/home/tavo/Documentos/Tarjetas/Card8.png"));
         list.add(new ImageIcon("/home/tavo/Documentos/Tarjetas/Card9.png"));
+        list.add(new ImageIcon("/home/tavo/Documentos/Tarjetas/Card10.png"));
     }
 
     public ImageIcon getIcon(int ID){
-        System.out.println("ID " + (ID-1));
         return list.get(ID-1);
     }
 }

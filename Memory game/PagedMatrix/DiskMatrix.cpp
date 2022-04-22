@@ -74,10 +74,36 @@ int DiskMatrix::checkCard(int i, int j, string option) {//verifica si una carta 
  * Este metodo se encarga de actualizar el estado de las tarjetas en disco.
  * @param i fila de la tarjeta.
  * @param j columna de la tarjeta.
- * @param data tarjeta con los datos para actualizar en disco.
+ * @param option opcion para actualizar el estado de la tarjeta
  */
-void DiskMatrix::updateCardStatus(int i, int j, TarjetaDisk data) {
-    ofstream file("BinaryMatrix.dat", ios::out | ios::binary);
+void DiskMatrix::updateCardStatus(int i, int j, int option) {
+    TarjetaDisk data;
+    ifstream read("BinaryMatrix.dat", ios::in | ios::binary);
+    if(!read){
+        cout << "Error opening the file" << endl;
+        exit(1);
+    }
+    read.seekg(i*pageSize+j*cardSize); //se posiciona el puntero en el archivo justo en la tarjeta buscada.
+    read.read((char*)&data, cardSize);
+    read.close();
+
+    switch (option) {
+        case 0:
+            //No en memoria
+            data.isInMemory = 0;
+        case 1:
+            //En memoria
+            data.isInMemory = 1;
+        case 2:
+            //No volteada
+            data.status = 0;
+        case 3:
+            //Volteada
+            data.status = 1;
+    }
+    cout << data.ID << data.status << data.isInMemory << endl;
+    ofstream file;
+    file.open("BinaryMatrix.dat", ios::out | ios::binary);
     if(!file){
         cout << "Error opening the file" << endl;
         exit(1);
@@ -98,6 +124,7 @@ int DiskMatrix::randomGenerator(int min, int max) { //generador random en el int
  * Este metodo se encarga de buscar la tarjeta en disco y retornarla
  * @param i fila de la tarjeta.
  * @param j columna de la tarjeta.
+ * @param option opcion para obtener ID, estado o si la tarjeta se encuentra en memoria.
  * @return tarjeta buscada en la matriz binaria.
  */
 int DiskMatrix::getCard(int i, int j, int option) {//busca y retorna la tarjeta en la posicion especificada

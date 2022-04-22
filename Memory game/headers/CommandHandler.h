@@ -32,9 +32,9 @@ public:
 
 private:
     map<string, function<void()>> CommandMap;
-    void SaveNames(json JSON), sendMatrixSize(), sendNames(), sendCardImage();
+    void SaveNames(json JSON), sendMatrixSize(), sendNames(), sendCardImage(), validateCards();
     json JSON;
-    int server;
+    int server, Card1, Card2, times;
     ServerInterface* Instance;
     PagedArray pagedArray;
 };

@@ -7,15 +7,18 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class GameInterface {
     private JFrame Frame;
     private JLabel P1, P2, Name1, Name2, Score1, Score2, playerTurn, TURN;
-    private int iSize, jSize, X = 110, Y = 10, Height = 130, Width = 100, Clicks = 0;
+    private int iSize, jSize, X = 110, Y = 10, Height = 130, Width = 100, Clicks = 0, i1, j1, i2, j2;
+    private Stack<JLabel> labelList = new Stack<>();
     private static GameInterface instance;
     private final ClientRequests request = ClientRequests.getInstance();
     private Font font = new Font("default", Font.BOLD, 14);
     private final CardImages images = new CardImages();
+    private ArrayList<JLabel> Labels = new ArrayList<>(iSize*jSize);
     public int ID;
     public boolean turn, gotID = false; //true=J1, false=J2
 
@@ -118,7 +121,6 @@ public class GameInterface {
     }
 
     public void createCardSlots(){
-        ArrayList<JLabel> Labels = new ArrayList<>(iSize*jSize);
         ImageIcon icon = new ImageIcon("Marco.png");
         int count = 0; //fila
         while(count<iSize){
@@ -127,14 +129,20 @@ public class GameInterface {
                 slot.setBounds(X,Y,70,100);
                 int I = count;
                 int J = i;
-                int Id = ID;
                 slot.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         request.requestCard(I, J);
                         Clicks++;
+                        if(Clicks == 1){
+                            i1 = I;
+                            j1 = J;
+                        }
                         if(Clicks == 2){
+                            i2 = I;
+                            j2 = J;
                             Clicks = 0;
+                            request.requestCardValidation();
                             switchTurn();
                         }
                         while(true){
@@ -191,8 +199,31 @@ public class GameInterface {
         }
     }
 
-    public static void main(String[] args) {
-        GameInterface Interface = new GameInterface();
-        Interface.launchInterface(Integer.valueOf("6"),Integer.valueOf("5"));
+    private void TimeOut(int milisec){
+        try{
+            Thread.sleep(milisec);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addPoints(){
+        if(turn){
+            int score = Integer.parseInt(Score2.getText()) + 10;
+            Score2.setText(String.valueOf(score));
+        }else{
+            int score = Integer.parseInt(Score1.getText()) + 10;
+            Score1.setText(String.valueOf(score));
+        }
+    }
+
+    public void swapCards() {
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        Labels.get((i1*5)+j1).setIcon(new ImageIcon("Marco.png"));
+        Labels.get((i2*5)+j2).setIcon(new ImageIcon("Marco.png"));
     }
 }

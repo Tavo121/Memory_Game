@@ -27,6 +27,7 @@ public class ResponseHandler {
         responseMap.put("MatrixSize", this::getMatrix);
         responseMap.put("PlayerNames", this::getNames);
         responseMap.put("ID", this::getID);
+        responseMap.put("Validate",this::getCardValidation);
     }
 
     /**
@@ -53,13 +54,20 @@ public class ResponseHandler {
         GameInstance.setPlayerNames((String) json.get("P1"), (String) json.get("P2"));
     }
 
-    private void getID(){
+    private void getID(){ //Obtiene el ID de la carta solicitada
         Long id = (Long) json.get("ID");
         int ID = id.intValue();
-        System.out.println(id);
-        System.out.println(ID);
         GameInstance.ID = ID;
         GameInstance.gotID = true;
+    }
+
+    private void getCardValidation(){ //Obtiene la validacion de las tarjetas seleccionadas
+        boolean validation = (boolean) json.get("Validate");
+        if(!validation){
+            GameInstance.swapCards();
+        }else{
+            GameInstance.addPoints();
+        }
     }
 
     private boolean playerTurn(){

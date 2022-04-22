@@ -11,7 +11,7 @@
  */
 void PagedArray::allocateCards() {//Carga de tarjeta inicial a memoria
     int count = 0;
-    while(count < 10){//carga 10 tarjetas random a memoria
+    while(count < 10){ //carga 10 tarjetas random a memoria
         int iRandom = binarMatrix.randomGenerator(0,5);
         int jRandom = binarMatrix.randomGenerator(0,4);
         if(binarMatrix.checkCard(iRandom, jRandom, "Memory") == 0){
@@ -27,7 +27,6 @@ void PagedArray::allocateCards() {//Carga de tarjeta inicial a memoria
 
 /**
  * Este metodo se encarga de crear las tarjetas que se van a cargar a memoria.
- * @param diskCard contiene informacion de la tarjeta en disco.
  * @param i fila de la tarjeta.
  * @param j columna de la tarjeta.
  * @return tarjeta creada y lista para ser cargada a memoria.
@@ -35,6 +34,7 @@ void PagedArray::allocateCards() {//Carga de tarjeta inicial a memoria
 Card* PagedArray::generateCard(int i, int j) {
     Card* card = new Card();
     string position = to_string(i) + "," + to_string(j);
+    //binarMatrix.updateCardStatus(i, j, 1);
     int cardID = binarMatrix.getCard(i, j, 0);
     int Status = binarMatrix.getCard(i, j, 1);
     card->status = Status;
@@ -60,8 +60,7 @@ void PagedArray::saveCardToDisk(){
     }
     int i = stoi(tokens[0]);
     int j = stoi(tokens[1]);
-    binarMatrix.updateCardStatus(i, j, generateData(temp));
-    free(memoryCards[size-1]);
+    //binarMatrix.updateCardStatus(i, j, 0);
 }
 
 void PagedArray::loadCard(int i, int j) {
@@ -94,14 +93,15 @@ int PagedArray::getCardInMemory(int i, int j) {
         for(int i=0; i<memoryCards.size(); i++){
             if(memoryCards[i]->pos == place){
                 memoryCards[i]->status = 1; // volteada
+                interfaceInstance->updatePageHit();
                 return memoryCards[i]->ID;
             }
         }
     }else{ //paginacion
-        cout << "Paginacion" << endl;
         saveCardToDisk(); //descarga a disco de tarjeta
         loadCard(i, j); //carga de tarjeta a memoria
         interfaceInstance->updateCards(place);
+        interfaceInstance->updatePageFault();
         memoryCards[size-1]->status = 1;
         return memoryCards[size-1]->ID;
     }

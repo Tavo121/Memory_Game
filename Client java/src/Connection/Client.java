@@ -15,7 +15,7 @@ import java.net.Socket;
  * @author Gustavo Alvarado Aburto.
  * @version 1.0.
  *
- * Descripcion: Esta clase se encarga establecer al conexion al puerto habilitado por el servidor.
+ * Descripcion: Esta clase se encarga de establecer al conexion al puerto habilitado por el servidor.
  */
 public class Client extends ResponseHandler implements Runnable {
     private final String HOST = "127.0.0.1";
@@ -46,7 +46,7 @@ public class Client extends ResponseHandler implements Runnable {
     /**
      * Este metodo se encarga de mantenerse antento a las respuestar del servidor y el manejo de las mismas.
      */
-    public void listen() throws IOException {
+    public void listen() {
         while(true){
             try{
                 String response = in.readLine();
@@ -54,7 +54,6 @@ public class Client extends ResponseHandler implements Runnable {
                 JSONObject JSONResponse = (JSONObject) parser.parse(response); //conversion de respuesta del servidor a JSON
                 handle(JSONResponse); //manejo de la respuesta recibida del servidor.
             }catch(IOException | ParseException e){
-                Client.close();
                 System.out.println("Conexion ended");
             }
         }
@@ -65,10 +64,6 @@ public class Client extends ResponseHandler implements Runnable {
      */
     @Override
     public void run() {
-        try {
-            listen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        listen();
     }
 }

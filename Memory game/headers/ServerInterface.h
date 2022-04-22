@@ -10,20 +10,16 @@ using namespace sf;
 using namespace std;
 class ServerInterface {
 public:
-    void launchWindow();
-    void setPlayerNames(string P1, string P2);
-    void threadRender();
-    void setCardsInMemory(string pos);
-    void updateCards(string pos);
+    void launchWindow(), setPlayerNames(string P1, string P2), threadRender(), setCardsInMemory(string pos),
+        updateCards(string pos), setPageFaults(), updatePageFault(), setPageHits(), updatePageHit();
 
 private:
     RenderWindow window;
-    Text player1, player2, tarjetas;
+    Text player1, player2, tarjetas, name1, name2, pageFault, pageFaultCount, pageHit, pageHitCount;
     vector<Text> texts;
     Font font;
-    Text name1, name2;
     void createText();
-    int X = 10, Y = 150, count = 0;
+    int X = 10, Y = 150, count = 0, faultCount = 0, hitCount = 0;
 };
 
 

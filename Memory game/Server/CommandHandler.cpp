@@ -50,12 +50,30 @@ void CommandHandler::sendNames(){
     string response =  to_string(JSONResponse);
     Server::sender(response, server);
 }
-
+/**
+ * Este metodo se encarga de enviar el ID de la imagen al cliente.
+ */
 void CommandHandler::sendCardImage() {
     json JSONResponse;
     JSONResponse["Type"] = "ID";
-    JSONResponse["ID"] = pagedArray(JSON["I"], JSON["J"]);
+    int ID = pagedArray(JSON["I"], JSON["J"]);
+    JSONResponse["ID"] = ID;
     string response =  to_string(JSONResponse);
+    Server::sender(response, server);
+    times++;
+    if (times == 1){
+        Card1 = ID;
+    }else{
+        Card2 = ID;
+        times = 0;
+    }
+}
+
+void CommandHandler::validateCards(){ //Valida el par de cartas seleccionadas y lo envia al cliente.
+    json JSONResponse;
+    JSONResponse["Type"] = "Validate";
+    JSONResponse["Validate"] = Card1==Card2;
+    string response = to_string(JSONResponse);
     Server::sender(response, server);
 }
 
@@ -72,4 +90,5 @@ CommandHandler::CommandHandler(int socket, ServerInterface* windowInstance) {
     CommandMap["MatrixSize"] = [this]() {sendMatrixSize();};
     CommandMap["PlayerNames"] = [this]() {sendNames();};
     CommandMap["Card"] = [this]() {sendCardImage();};
+    CommandMap["Validate"] = [this]() {validateCards();};
 }
