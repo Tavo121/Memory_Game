@@ -21,6 +21,7 @@ void PagedArray::allocateCards() {//Carga de tarjeta inicial a memoria
             count++;
             TESTi = iRandom;
             TESTj = jRandom;
+            positionsInMemory.push_back(to_string(iRandom) + "," + to_string(jRandom));
             cout << "Tarjeta random cargada: " << iRandom << jRandom << endl;
         }
     }

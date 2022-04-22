@@ -46,6 +46,7 @@ public class ResponseHandler {
         String[] rowCol = size.split("x");
         GameInstance = GameInterface.getInstance();
         GameInstance.launchInterface(Integer.valueOf(rowCol[0]), Integer.valueOf(rowCol[1]));
+        GameInstance.turn = playerTurn();
     }
 
     private void getNames(){ //Obtiene los nombres de los jugadores y los muestra en la interfaz de juego.
@@ -54,5 +55,13 @@ public class ResponseHandler {
 
     private void getID(){
         System.out.println(json.get("ID"));
+    }
+
+    private boolean playerTurn(){
+        int random = (int) (Math.random()*2);
+        if (random == 0){
+            return true;
+        }
+        return false;
     }
 }

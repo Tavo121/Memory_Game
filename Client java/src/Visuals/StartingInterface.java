@@ -3,6 +3,7 @@ package Visuals;
 import Connection.Client;
 import Connection.ClientRequests;
 import org.json.simple.JSONObject;
+import java.util.Random;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;

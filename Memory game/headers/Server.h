@@ -31,7 +31,7 @@ public:
     Server();
 
 private:
-    int client, server, portNum = 5050, bufSize = 1024;
+    int client, server, portNum = 5000, bufSize = 1024;
     char buff[1024];
     socklen_t size;
     struct sockaddr_in server_addr;

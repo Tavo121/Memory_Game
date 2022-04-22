@@ -24,6 +24,13 @@ void ServerInterface::createText() {
     player2.setCharacterSize(20);
     player2.setFillColor(Color::White);
     player2.setPosition(player1.getGlobalBounds().width+20, 5);
+
+    tarjetas.setFont(font);
+    tarjetas.setCharacterSize(25);
+    tarjetas.setFillColor(Color::White);
+    tarjetas.setString("Tarjetas en memoria:");
+    tarjetas.setPosition(10, 100);
+    texts.push_back(tarjetas);
 }
 
 void ServerInterface::setPlayerNames(string P1, string P2) {
@@ -38,6 +45,27 @@ void ServerInterface::setPlayerNames(string P1, string P2) {
     name2.setCharacterSize(20);
     name2.setFillColor(Color::White);
     name2.setPosition(100,30);
+}
+
+void ServerInterface::setCardsInMemory(string pos) {
+    string name = "Tarjeta: " + pos;
+    Text tarjeta;
+    tarjeta.setFont(font);
+    tarjeta.setString(name);
+    tarjeta.setCharacterSize(20);
+    tarjeta.setFillColor(Color::White);
+    if(count == 3){
+        count = 0;
+        X = 10;
+        Y = Y + tarjeta.getGlobalBounds().height + 20;
+
+        cout << count << endl;
+    }
+    tarjeta.setPosition(X,Y);
+    texts.push_back(tarjeta);
+    X = X + tarjeta.getGlobalBounds().width + 15;
+    count++;
+
 }
 
 void ServerInterface::launchWindow() {
@@ -59,6 +87,8 @@ void ServerInterface::threadRender() {
         window.draw(player2);
         window.draw(name1);
         window.draw(name2);
+        for(int i=0; i<texts.size(); i++)
+            window.draw(texts[i]);
         window.display();
     }
 }

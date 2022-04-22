@@ -13,13 +13,16 @@ public:
     void launchWindow();
     void setPlayerNames(string P1, string P2);
     void threadRender();
+    void setCardsInMemory(string pos);
 
 private:
     RenderWindow window;
-    Text player1, player2;
+    Text player1, player2, tarjetas;
+    vector<Text> texts;
     Font font;
     Text name1, name2;
     void createText();
+    int X = 10, Y = 150, count = 0;
 };
 
 

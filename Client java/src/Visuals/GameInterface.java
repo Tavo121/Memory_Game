@@ -10,10 +10,13 @@ import java.util.ArrayList;
 
 public class GameInterface {
     private JFrame Frame;
-    private JLabel P1, P2, Name1, Name2;
-    private int iSize, jSize, X = 110, Y = 10, Height = 130, Width = 100;
+    private JLabel P1, P2, Name1, Name2, Score1, Score2, playerTurn, TURN;
+    private int iSize, jSize, X = 110, Y = 10, Height = 130, Width = 100, Clicks = 0;
     private static GameInterface instance;
     private final ClientRequests request = ClientRequests.getInstance();
+    private Font font = new Font("default", Font.BOLD, 14);
+    public boolean turn; //true=J1, false=J2
+
 
     /**
      * Patron Singleton
@@ -66,17 +69,50 @@ public class GameInterface {
         Name2 = new JLabel(J2);
         Name1.setBounds(10, 790, 80, 20);
         Name2.setBounds(150, 790, 80, 20);
-        Name1.setFont(new Font("default", Font.BOLD, 14));
-        Name2.setFont(new Font("default", Font.BOLD, 14));
+        Name1.setFont(font);
+        Name2.setFont(font);
         Name1.setForeground(Color.BLUE);
         Name2.setForeground(Color.RED);
         Frame.add(Name1);
         Frame.add(Name2);
+        setScores();
+        setPlayerTurn();
     }
 
     public void setMatrixI_J(int matrixI, int matrixJ){
         iSize = matrixI;
         jSize = matrixJ;
+    }
+
+    public void setScores(){
+        Score1 = new JLabel("0");
+        Score2 = new JLabel("0");
+        Score1.setBounds(10,830, 20,20);
+        Score2.setBounds(150,830, 20,20);
+        Score1.setFont(font);
+        Score2.setFont(font);
+        Score1.setForeground(Color.BLUE);
+        Score2.setForeground(Color.RED);
+        Frame.add(Score1);
+        Frame.add(Score2);
+    }
+
+    public void setPlayerTurn(){
+        playerTurn = new JLabel("Turno");
+        TURN = new JLabel();
+        playerTurn.setBounds(350, 765, 100, 25);
+        TURN.setBounds(350, 790, 100,25);
+        playerTurn.setFont(font);
+        TURN.setFont(font);
+        if(turn){
+            TURN.setText(Name1.getText());
+            TURN.setForeground(Color.BLUE);
+        }else{
+            TURN.setText(Name2.getText());
+            TURN.setForeground(Color.RED);
+        }
+        Frame.add(playerTurn);
+        Frame.add(TURN);
     }
 
     public void createCardSlots(){
@@ -93,6 +129,11 @@ public class GameInterface {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         request.requestCard(I, J);
+                        Clicks++;
+                        if(Clicks == 2){
+                            Clicks = 0;
+                            switchTurn();
+                        }
                     }
 
                     @Override
@@ -124,6 +165,17 @@ public class GameInterface {
         }
         for(JLabel item : Labels){
             Frame.add(item);
+        }
+    }
+
+    private void switchTurn(){
+        turn = !turn;
+        if(turn){
+            TURN.setText(Name1.getText());
+            TURN.setForeground(Color.BLUE);
+        }else{
+            TURN.setText(Name2.getText());
+            TURN.setForeground(Color.RED);
         }
     }
 

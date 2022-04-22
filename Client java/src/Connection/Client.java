@@ -19,7 +19,7 @@ import java.net.Socket;
  */
 public class Client extends ResponseHandler implements Runnable {
     private final String HOST = "127.0.0.1";
-    private final int PORT = 5050;
+    private final int PORT = 5000;
     private PrintWriter out;
     private BufferedReader in;
     private Socket Client;

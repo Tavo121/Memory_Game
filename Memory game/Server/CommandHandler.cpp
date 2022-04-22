@@ -24,6 +24,9 @@ void CommandHandler::Handle(string Json){
     J1 = JSON["P1"];
     J2 = JSON["P2"];
     Instance->setPlayerNames(J1, J2);
+    for(int i=0; i<pagedArray.positionsInMemory.size(); i++){
+        Instance->setCardsInMemory(pagedArray.positionsInMemory[i]);
+    }
 }
 /**
  * Este metodo se encarga de responder a la peticion del tamaño de la matriz.

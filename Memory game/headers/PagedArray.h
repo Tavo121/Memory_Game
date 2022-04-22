@@ -8,6 +8,7 @@
 
 #include "Card.h"
 #include "DiskMatrix.h"
+#include "ServerInterface.h"
 #include <vector>
 
 using namespace std;
@@ -29,6 +30,7 @@ public:
         return getCardInMemory(i, j);
     }
     int getCardInMemory(int i, int j);
+    vector<string> positionsInMemory;
     PagedArray();
 
 private:
